@@ -14,7 +14,7 @@ class EnvironmentSaved
     private $request;
 
     /** 
-     * Create a new event instance. 
+     * Create a new event instance.
      *
      * @param Request $request
      * @return void

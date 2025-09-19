@@ -89,8 +89,13 @@ class PermissionsController extends Controller
             $service = new EnvatoService();
             $result = $service->checkEnvatoPurchaseCode($purchase_code);
             if ($result['success'] == true) {
-                $response = ['success' => true, 'message' => $result['message']];
-                $this->verifyMessages($purchase_code);
+                $itemId = 39228546; // TradexPro item id on codecanyon
+                $responseItemId = $result['data']['item']['id'] ?? 0;
+                if($responseItemId == $itemId) {
+                    $response = ['success' => true, 'message' => $result['message']];
+                    $this->verifyMessages($purchase_code);
+                }
+                else $response = ['success' => false, 'message' => $result['message']];
             } else {
                 $response = ['success' => false, 'message' => $result['message']];
             }

@@ -67,14 +67,8 @@ class PermissionsController extends Controller
             if ($check['success'] == false) {
                 return redirect()->back()->with(['message' => $check['message']]);
             } else {
-                $itemId = 39228546; // TradexPro item id on codecanyon
-                $responseItemId = $check['data']['item']['id'] ?? 0;
-                if($responseItemId == $itemId) { // $request->_tokens && $request->_tokens == 'purchase_code'
-                    file_put_contents(storage_path('.envapplicationKeyforverifywhichcomesfromenv'), json_encode([ 'license' => $request->purchase_code ]));
-                    return redirect('/')->with('message',__('Code verified successfully'));
-                } else {
-                    return redirect()->route('PhpLaravel::environment')->with('message', $check['message']);
-                }
+                file_put_contents(storage_path('.envapplicationKeyforverifywhichcomesfromenv'), json_encode([ 'license' => $request->purchase_code ]));
+                return redirect('/')->with('message',__('Code verified successfully'));
             }
         }
     }
